@@ -1,0 +1,57 @@
+{% extends 'bookingsubject/layout.html' %} {% block body %}
+<div>
+  <h2 class="head-text text-center">Subject Infomation</h2>
+  <div class="info-body">
+    <ul class="list-group list-group-flush sub-text">
+      <li class="list-group-item bg-transparent">
+        Subject name : {{ subject_data.subject_name }}
+      </li>
+      <li class="list-group-item bg-transparent">
+        Semester : {{ subject_data.semester }}
+      </li>
+      <li class="list-group-item bg-transparent">
+        Academic Year : {{ subject_data.academic_year }}
+      </li>
+      <li class="list-group-item bg-transparent">
+        Maximum student : {{ subject_data.amount }} / {{ students.count }}
+      </li>
+      <li class="list-group-item bg-transparent">
+        Status : {{ subject_data.status }}
+      </li>
+    </ul>
+  </div>
+  <h2 class="head-text text-center">Student in class</h2>
+  <div class="student-list mt-2">
+    <table class="table table-hover text-center">
+      <thead>
+        <tr class="sub-text">
+          <th scope="col">#</th>
+          <th scope="col">username</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for student in students %}
+        <tr>
+          <th scope="row" class="text-white align-middle">#{{ student.id }}</th>
+          <th scope="row" class="text-white align-middle">
+            {{ student.username }}
+          </th>
+        </tr>
+        {% empty %}
+        <tr class="text-white">
+          <th colspan="2"><i>No data</th>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="section-action mt-2 left-0">
+    <div class="flex float-right">
+      <div class="position-absolute justify-content-end">
+        <button class="btn btn-primary">Enroll</button>
+        <a class="btn btn-secondary" href="{% url 'booking_index' %}">Back</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

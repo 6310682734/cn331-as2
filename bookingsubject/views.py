@@ -1,16 +1,39 @@
 from cgitb import small
 from django.shortcuts import render
 from .models import Subject
-
+from django.db.models import Q
+from django.contrib.auth.models import User
 
 # Create your views here.
-def index(req, message=None):
+
+
+def index(req, data={"status": None, "message": None}):
     subjects = Subject.objects.all()
-    print("Subjects : ", subjects)
     return render(req, "bookingsubject/index.html", {
         "subjects": subjects,
-        "message": message
+        "message": data["message"],
+        "status": data["status"]
     })
+
+
+def remove_subject(req, subject_id):
+    try:
+        subject = Subject.objects.get(id=subject_id)
+        subject.delete()
+    except:
+        return index(req, {"status": False, "message": "Delete fail"})
+    return index(req, {"status": True, "message": "Remove subject successfully"})
+
+
+def subject_info(req, subject_id):
+    try:
+        subject = Subject.objects.get(id=subject_id)
+        students = User.objects.filter(~Q(username="admin"))
+        print("Students : ", students)
+        return render(req, "bookingsubject/subject_info.html", {"subject_data": subject, "students": students})
+    except:
+        return index(req, {"status": False, "message": "Subject not Found"})
+    return index(req)
 
 
 def update_subject(req, subject_id):

@@ -40,29 +40,52 @@
     <tbody class="text text-center">
       {% for subject in subjects %}
       <tr>
-        <th scope="row" class="text-info align-middle">#{{ subject.code }}</th>
+        <th scope="row" class="text-dark align-middle">#{{ subject.code }}</th>
         <th class="align-middle">{{ subject.subject_name }}</th>
         <th class="align-middle">{{ subject.semester }}</th>
         <th class="align-middle">{{ subject.academic_year }}</th>
         <th class="align-middle">{{ subject.amount }}</th>
         <th class="align-middle">{{ subject.status }}</th>
         <th class="align-middle">
-          {% if request.user.username == "admin" %}
-          <button class="btn btn-danger">Delete</button>
-          {% else %}
-          <button class="btn btn-primary">Book</button>
-          {% endif %}
+          <div class="row">
+            <div class="col">
+              <a
+                class="btn btn-primary"
+                href="{% url 'subject_info' subject.id %}"
+                >View</a
+              >
+            </div>
+            {% if request.user.username == "admin" %}
+            <div class="col">
+              <form action="{% url 'remove_subject' subject.id %}">
+                <button class="btn btn-danger" type="submit">Delete</button>
+              </form>
+            </div>
+            {% endif %}
+          </div>
         </th>
       </tr>
       {% empty %}
       <tr>
-        <th colspan="6"><i>No data</i></th>
+        <th colspan="7"><i>No data</i></th>
       </tr>
       {% endfor %}
     </tbody>
   </table>
-  {% if message %}
-  <div class="alert alert-danger text-center">{{ message}}</div>
+  {% if status == False and message %}
+  <div class="alert alert-danger text-center">
+    {{ message}}
+    <a class="btn btn-secondary ml-2" href="{% url 'booking_index' %}"
+      >Refresh</a
+    >
+  </div>
+  {% elif status == True %}
+  <div class="alert alert-success text-center">
+    {{ message }}
+    <a class="btn btn-secondary ml-2" href="{% url 'booking_index' %}"
+      >Refresh</a
+    >
+  </div>
   {% endif %}
 </div>
 {% endblock %}

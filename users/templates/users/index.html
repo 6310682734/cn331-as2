@@ -1,18 +1,24 @@
-{% extends 'users/layout.html' %}
-{% block body %}
-<div>
-  <h1>Welcome,
-    {{ request.user.first_name }}
-  </h1>
-  <ul>
+{% extends 'users/layout.html' %} {% block body %}
+<div class="sub-bg">
+  <!-- <h1>Welcome, -->
+  <h1 class="head-text">Welcome to Enrollment webpage 🤤</h1>
+  {% comment %} {{ request.user.first_name }} {% endcomment %}
+  <!-- </h1> -->
+  <h4 class="text">
+    Username : <span class="sub-text">{{ request.user.username }}</span>
+  </h4>
+  <h4 class="text">
+    Email : <span class="sub-text">{{ request.user.email }}</span>
+  </h4>
+  <!-- <ul>
     <li>Username:
       {{ request.user.username }}
     </li>
     <li>Email:
       {{ request.user.email }}
     </li>
-  </ul>
+  </ul> -->
 </div>
-<a class="btn btn-secondary" href="/bookingsubject/">Booking subject</a>
+<a class="btn btn-primary" href="/bookingsubject/">Booking subject</a>
 <a class="btn btn-danger" href="{% url 'logout' %}">Log out</a>
 {% endblock %}

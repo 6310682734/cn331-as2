@@ -38,7 +38,8 @@ def register_view(req):
             obj["status"] = False
             obj["message"] = "Enter your information"
         # Register Process
-        obj['message'] = "Register successfully"
+        if (obj["status"]):
+            obj['message'] = "Register successfully"
         user = User.objects.create_user(
             username=username, password=password, email=email, first_name=username)
     return render(req, "users/register.html", obj)

@@ -1,18 +1,24 @@
-{% extends 'users/layout.html' %}
-{% block body %}
+{% extends 'users/layout.html' %} {% block body %}
 <div>
-  <h2>Login Page</h2>
+  <h2 class="head-text">Login Page</h2>
   <form action="{% url 'login' %}" method="post">
     {% csrf_token %}
-    <input type="text" class="form-control m-2" name="username" placeholder="Username">
-    <input type="password" class="form-control m-2" name="password" placeholder="Password">
+    <input
+      type="text"
+      class="form-control m-2"
+      name="username"
+      placeholder="Username"
+    />
+    <input
+      type="password"
+      class="form-control m-2"
+      name="password"
+      placeholder="Password"
+    />
     <button type="submit" class="btn btn-primary">Login</button>
     <a class="btn btn-secondary" href="{% url 'register' %}">Register</a>
   </form>
 </div>
 {% if message %}
-<div class="alert alert-danger mt-2">
-  {{ message }}
-</div>
-{% endif %}
-{% endblock %}
+<div class="alert alert-danger mt-2">{{ message }}</div>
+{% endif %} {% endblock %}

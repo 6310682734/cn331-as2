@@ -1,1 +1,18 @@
-test user
+{% extends 'users/layout.html' %}
+{% block body %}
+<div>
+  <h1>Welcome,
+    {{ request.user.first_name }}
+  </h1>
+  <ul>
+    <li>Username:
+      {{ request.user.username }}
+    </li>
+    <li>Email:
+      {{ request.user.email }}
+    </li>
+  </ul>
+</div>
+<a class="btn btn-secondary" href="/bookingsubject/">Booking subject</a>
+<a class="btn btn-danger" href="{% url 'logout' %}">Log out</a>
+{% endblock %}

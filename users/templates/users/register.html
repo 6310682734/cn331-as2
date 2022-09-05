@@ -1,0 +1,31 @@
+{% extends 'users/layout.html' %}
+{% block body %}
+<div>
+  <h2>Register Page</h2>
+  <form action="{% url 'register' %}" method="post" class="justify-content-center p-3" align="center">
+    {% csrf_token %}
+    <input type="text" class="form-control m-2" name="username" placeholder="Username" />
+    <input type="email" class="form-control ml-2" name="email" placeholder="Email" />
+    <input type="password" class="form-control m-2" name="password" placeholder="Password" />
+    <input type="password" class="form-control m-2" name="confirm_password" placeholder="Confirm Password" />
+    <input type="submit" class="btn btn-primary m-2" value="Register">
+    <a class="btn btn-success" href="{% url 'login' %}">Login</a>
+  </form>
+</div>
+
+
+
+<div class="mt-2">
+  {% if status and message %}
+  <div class="alert alert-success">
+    Register Success
+  </div>
+  {% elif status == False %}
+  <div class="alert alert-danger">
+    <b>
+      {{ message }}</b>
+  </div>
+  {% endif %}
+</div>
+
+{% endblock %}

@@ -48,6 +48,9 @@
   <div class="section-action mt-2 left-0">
     <div class="flex float-right">
       <div class="position-absolute justify-content-end">
+        <form action="{% url 'enroll_subject' subject_data.id request.user.id  %}">
+
+        </form>
         <button class="btn btn-primary">Enroll</button>
         <a class="btn btn-secondary" href="{% url 'booking_index' %}">Back</a>
       </div>

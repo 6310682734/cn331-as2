@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Subject, Student
+from .models import Subject, Enrollment
 
 
 class SubjectAdmin(admin.ModelAdmin):
@@ -10,9 +10,9 @@ class SubjectAdmin(admin.ModelAdmin):
                     "academic_year", "amount", "status")
 
 
-class StudentAdmin(admin.ModelAdmin):
-    list_display = ("firstname", "lastname", "student_id")
+class EnrollmentAdmin(admin.ModelAdmin):
+    list_display = ("username", "subject_id")
 
 
-admin.site.register(Student, StudentAdmin)
+admin.site.register(Enrollment, EnrollmentAdmin)
 admin.site.register(Subject, SubjectAdmin)

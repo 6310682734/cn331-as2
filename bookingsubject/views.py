@@ -1,6 +1,6 @@
 from cgitb import small
 from django.shortcuts import render
-from .models import Subject
+from .models import Enrollment, Subject
 from django.db.models import Q
 from django.contrib.auth.models import User
 
@@ -28,23 +28,40 @@ def remove_subject(req, subject_id):
 def subject_info(req, subject_id):
     try:
         subject = Subject.objects.get(id=subject_id)
-        students = User.objects.filter(~Q(username="admin"))
-        print("Students : ", students)
-        return render(req, "bookingsubject/subject_info.html", {"subject_data": subject, "students": students})
-    except:
+        # students = User.objects.filter(~Q(username="admin"))
+        enrollment_list = Enrollment.objects.filter(
+            ~Q(username="admin"), subject_id=subject_id)
+        print("Students : ", subject_id)
+        return render(req, "bookingsubject/subject_info.html", {"subject_data": subject, "students": enrollment_list})
+    except Exception as e:
+        print("Error : ", e)
         return index(req, {"status": False, "message": "Subject not Found"})
-    return index(req)
 
 
 def update_subject(req, subject_id):
     pass
 
 
-def book_subject(req, subject_id):
-    pass
+def is_already_enroll(user_id):
+    try:
+        enroll = Enrollment.objects.get(user_id)
+        return True
+    except:
+        return False
 
 
-def unbook_subject(req, subject_id):
+def enroll_subject(req, subject_id, user_id):
+    try:
+        enrollment_list = Enrollment.objects.filter(
+            ~Q(username="admin"), subject_id=subject_id)
+        # if (is_already_enroll()):
+        # return render()
+        # pass
+    except:
+        pass
+
+
+def unenroll_subject(req, subject_id):
     pass
 
 

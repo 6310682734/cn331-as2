@@ -33,7 +33,9 @@
         <th scope="col">Semester</th>
         <th scope="col">Academic year</th>
         <th scope="col">Student Amount</th>
+        {% if request.user.is_superuser %}
         <th scope="col">Status</th>
+        {% endif %}
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -45,7 +47,9 @@
         <th class="align-middle">{{ subject.semester }}</th>
         <th class="align-middle">{{ subject.academic_year }}</th>
         <th class="align-middle">{{ subject.amount }}/{{ subject.student }}</th>
+        {% if request.user.is_superuser %}
         <th class="align-middle">{{ subject.status }}</th>
+        {% endif %}
         <th class="align-middle">
           <div class="row">
             <div class="col">

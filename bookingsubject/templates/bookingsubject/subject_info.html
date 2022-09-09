@@ -2,7 +2,7 @@
 <div style="color: white">
   <h2 class="text-white text-center">Subject Infomation</h2>
   <div class="info-body">
-    <ul class="list-group list-group-flush text-white">
+    <ul class="list-group list-group-flush text-white mb-4">
       <li class="list-group-item bg-transparent">
         Subject name : {{ subject_data.subject_name }}
       </li>
@@ -15,26 +15,32 @@
       <li class="list-group-item bg-transparent">
         Maximum student : {{ subject_data.amount }} / {{ enrolls.count }}
       </li>
+      {% if request.user.is_superuser == True %}
       <li class="list-group-item bg-transparent">
         Status : {{ subject_data.status }}
       </li>
+      {% endif %}
     </ul>
   </div>
   <h2 class="text-white text-center">Student in class</h2>
-  <div class="student-list mt-2">
+  <div class="student-list mt-2 bg-white">
     <table class="table table-hover text-center">
       <thead>
-        <tr class="text-white">
+        <tr class="sub-text">
           <th scope="col">#</th>
           <th scope="col">Student ID</th>
+          <th scope="col">Name</th>
         </tr>
       </thead>
       <tbody>
         {% for enroll in enrolls %}
         <tr>
-          <th scope="row" class="text-white align-middle">#{{ forloop.counter }}</th>
-          <th scope="row" class="text-white align-middle">
-            {{ enroll.user}}
+          <th scope="row" class="sub-text align-middle">#{{ forloop.counter }}</th>
+          <th scope="row" class="sub-text align-middle">
+            {{ enroll.user.username}}
+          </th>
+          <th scope="row" class="sub-text align-middle">
+            {{ enroll.user.first_name }} {{ enroll.user.last_name }}
           </th>
         </tr>
         {% empty %}

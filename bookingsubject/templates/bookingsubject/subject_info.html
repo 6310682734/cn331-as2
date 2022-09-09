@@ -13,7 +13,7 @@
         Academic Year : {{ subject_data.academic_year }}
       </li>
       <li class="list-group-item bg-transparent">
-        Maximum student : {{ subject_data.amount }} / {{ students.count }}
+        Maximum student : {{ subject_data.amount }} / {{ enrolls.count }}
       </li>
       <li class="list-group-item bg-transparent">
         Status : {{ subject_data.status }}
@@ -30,11 +30,11 @@
         </tr>
       </thead>
       <tbody>
-        {% for student in students %}
+        {% for enroll in enrolls %}
         <tr>
-          <th scope="row" class="text-white align-middle">#{{ student.id }}</th>
+          <th scope="row" class="text-white align-middle">#{{ forloop.counter }}</th>
           <th scope="row" class="text-white align-middle">
-            {{ student.username }}
+            {{ enroll.user}}
           </th>
         </tr>
         {% empty %}
@@ -47,13 +47,22 @@
   </div>
   <div class="section-action mt-2 left-0">
     <div class="flex float-right">
-      <div class="position-absolute justify-content-end">
-        <form action="{% url 'enroll_subject' subject_data.id request.user.id  %}">
-
-        </form>
-        <button class="btn btn-primary">Enroll</button>
-        <a class="btn btn-secondary" href="{% url 'booking_index' %}">Back</a>
-      </div>
+      {% if is_already_enroll == False %}
+      <form class="btn" action="{% url 'enroll_subject' subject_data.id request.user.id  %}" method="post">
+        {% csrf_token %}
+        {% if request.user.is_superuser == False %}
+        <button type="submit" class="btn btn-primary">Enroll</button>
+        {% endif %}
+      </form>
+      {% else %}
+      <form class="btn" action="{% url 'unenroll_subject' subject_data.id %}" method="post">
+        {% csrf_token %}
+        {% if request.user.is_superuser == False %}
+        <button type="submit" class="btn btn-danger">Unenroll</button>
+        {% endif %}
+      </form>
+      {% endif %}
+      <a class="btn btn-secondary" href="{% url 'booking_index' %}">Back</a>
     </div>
   </div>
 </div>

@@ -7,11 +7,11 @@ from .models import Subject, Enrollment
 
 class SubjectAdmin(admin.ModelAdmin):
     list_display = ("code", "subject_name", "semester",
-                    "academic_year", "amount", "status")
+                    "academic_year", "amount" ,"student" ,"status")
 
 
 class EnrollmentAdmin(admin.ModelAdmin):
-    list_display = ("username", "subject_id")
+    list_display = ("user", "subject")
 
 
 admin.site.register(Enrollment, EnrollmentAdmin)

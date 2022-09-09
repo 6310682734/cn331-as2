@@ -19,6 +19,8 @@ def register_view(req):
     }
     if req.method == "POST":
         username = req.POST["username"]
+        firstname = req.POST["firstname"]
+        lastname = req.POST["lastname"]
         password = req.POST["password"]
         email = req.POST["email"]
         con_password = req.POST["confirm_password"]
@@ -41,7 +43,7 @@ def register_view(req):
         if (obj["status"]):
             obj['message'] = "Register successfully"
         user = User.objects.create_user(
-            username=username, password=password, email=email, first_name=username)
+            username=username, password=password, email=email, first_name=firstname, last_name=lastname)
     return render(req, "users/register.html", obj)
 
 

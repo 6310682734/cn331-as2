@@ -2,11 +2,6 @@ body {
     background-color: #2D2926FF;
     color: #456990;
 }
-/* 
-.sub-bg {
-    background-color: #028090;
-} */
-
 .head-text {
     color: #E94B3CFF
 }
@@ -15,4 +10,7 @@ body {
 }
 .sub-text {
     color: gray
+}
+a #logout{
+    left: 100px;
 }

@@ -6,7 +6,7 @@
         <h2
           class="position-relative text-center justify-content-center head-text"
         >
-          Booking Subjects
+          Subject Enrollmented
         </h2>
       </div>
       <div class="col">
@@ -15,13 +15,6 @@
           href="{% url 'index' %}"
           >Back</a
         >
-        {% if request.user.is_superuser %}
-        <a
-          class="position-relative mr-1 justify-content-end btn btn-primary float-right"
-          href="{% url 'create_subject' %}"
-          >Create subject</a
-        >
-        {% endif %}
       </div>
     </div>
   </div>
@@ -38,30 +31,24 @@
       </tr>
     </thead>
     <tbody class="text text-center">
-      {% for subject in subjects %}
+      {% for enroll in enrolls %}
       <tr>
-        <th scope="row" class="text-dark align-middle">#{{ subject.code }}</th>
-        <th class="align-middle">{{ subject.subject_name }}</th>
-        <th class="align-middle">{{ subject.semester }}</th>
-        <th class="align-middle">{{ subject.academic_year }}</th>
-        <th class="align-middle">{{ subject.amount }}/{{ subject.student }}</th>
-        <th class="align-middle">{{ subject.status }}</th>
+        <th scope="row" class="text-dark align-middle">#{{ enroll.subject.code }}</th>
+        <th class="align-middle">{{ enroll.subject.subject_name }}</th>
+        <th class="align-middle">{{ enroll.subject.semester }}</th>
+        <th class="align-middle">{{ enroll.subject.academic_year }}</th>
+        <th class="align-middle">{{ enroll.subject.amount }}/{{ enroll.subject.student }}</th>
+        <th class="align-middle">{{ enroll.subject.status }}</th>
         <th class="align-middle">
           <div class="row">
             <div class="col">
-              <a
-                class="btn btn-primary"
-                href="{% url 'subject_info' subject.id %}"
-                >View</a
-              >
-            </div>
-            {% if request.user.is_superuser %}
-            <div class="col">
-              <form action="{% url 'remove_subject' subject.id %}">
-                <button class="btn btn-danger" type="submit">Delete</button>
+              <form class="btn" action="{% url 'unenroll_subject' enroll.subject.id %}" method="post">
+                {% csrf_token %}
+                {% if request.user.is_superuser == False %}
+                <button type="submit" class="btn btn-danger">Unenroll</button>
+                {% endif %}
               </form>
             </div>
-            {% endif %}
           </div>
         </th>
       </tr>

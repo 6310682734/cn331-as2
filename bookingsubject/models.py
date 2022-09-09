@@ -6,25 +6,25 @@ from django.contrib.auth.models import User
 
 
 class Subject(models.Model):
-    code = models.CharField(max_length=3)
+    code = models.CharField(max_length=3, unique=True)
     subject_name = models.CharField(max_length=15)
     semester = models.CharField(max_length=1)
     academic_year = models.IntegerField()
     amount = models.IntegerField()
     status = models.BooleanField()
+    student = models.IntegerField(default=0)
 
     def __str__(self):
-        return f"{self.code} {self.subject_name} {self.semester} {self.academic_year} {self.amount} {self.status}"
+        return f"{self.code} {self.subject_name} {self.semester} {self.academic_year} {self.amount} {self.status} {self.student}" 
 
 
 class Enrollment(models.Model):
-    username = models.CharField(max_length=10)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
-    subject_id = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, unique=True, to_field="id")
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE, to_field="code")
     # firstname = models.CharField(max_length=20)
     # lastname = models.CharField(max_length=20)
     # student_id = models.CharField(max_length=10)
     # password = models.CharField(max_length=10)
 
     def __str__(self):
-        return f"{self.user_id} {self.username} {self.subject_id}"
+        return f"{self.user} {self.subject}"

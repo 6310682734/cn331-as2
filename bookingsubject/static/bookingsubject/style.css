@@ -1,18 +1,13 @@
 body {
-    background-color: #2D2926FF;
-    color: #456990;
+    background-color: black;
+    color: white;
 }
-/* 
-.sub-bg {
-    background-color: #028090;
-} */
-
 .head-text {
-    color: #E94B3CFF
+    color: rgb(142, 22, 22)
 }
 .text {
-    color: darkgray
+    color: black
 }
 .sub-text {
-    color: gray
+    color: black
 }

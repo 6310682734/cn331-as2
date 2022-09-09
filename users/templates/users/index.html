@@ -1,25 +1,33 @@
 {% extends 'users/layout.html' %} {% block body %}
-<a class="btn btn-danger float-right right-0" id="logout" href="{% url 'logout' %}">Log out</a>
 <div class="sub-bg">
   <!-- <h1>Welcome, -->
-  <h1 class="head-text">Welcome to Enrollment webpage 🤤</h1>
-  {% comment %} {{ request.user.first_name }} {% endcomment %}
-  <!-- </h1> -->
-  <h4 class="text">
-    Username : <span class="sub-text">{{ request.user.username }}</span>
-  </h4>
-  <h4 class="text">
-    Email : <span class="sub-text">{{ request.user.email }}</span>
-  </h4>
-  <!-- <ul>
-    <li>Username:
-      {{ request.user.username }}
-    </li>
-    <li>Email:
-      {{ request.user.email }}
-    </li>
-  </ul> -->
+  <h1 class="head-text">Announcement</h1>
+  <div class="card text-left bg-dark mb-4">
+    <div class="card-header">
+      To student
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Booking subject</h5>
+      <p class="card-text">For students who wish to enroll in various courses.</p>
+      <a href="/bookingsubject" class="btn btn-primary text-right inline">View</a>
+    </div>
+    <div class="card-footer">
+      90 days left
+    </div>
+  </div>
+  <div class="card text-left bg-dark">
+    <div class="card-header">
+      To student
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Subject enrollmented</h5>
+      <p class="card-text">For viewing courses that students have already registered.</p>
+      <a href="/bookingsubject/enrollmented" class="btn btn-primary">View</a>
+    </div>
+    <div class="card-footer text-muted">
+      
+    </div>
+  </div>
 </div>
-<a class="btn btn-primary" href="/bookingsubject/">Subjects</a>
-<a class="btn btn-secondary" href="/bookingsubject/enrollmented">Enrollmented</a>
+
 {% endblock %}

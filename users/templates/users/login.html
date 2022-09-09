@@ -1,22 +1,22 @@
 {% extends 'users/layout.html' %} {% block body %}
-<div>
-  <h2 class="head-text">Login Page</h2>
+<div class="login">
+  <h1 class="head-text">WELCOME</h1>
   <form action="{% url 'login' %}" method="post">
     {% csrf_token %}
     <input
       type="text"
-      class="form-control m-2"
+      class="form-control m-4"
       name="username"
       placeholder="Student ID"
     />
     <input
       type="password"
-      class="form-control m-2"
+      class="form-control m-4"
       name="password"
       placeholder="Password"
     />
-    <button type="submit" class="btn btn-primary">Login</button>
-    <a class="btn btn-secondary" href="{% url 'register' %}">Register</a>
+    <button type="submit" class="btn btn-primary m-2 ml-2">Login</button>
+    <a class="btn btn-secondary m-2 ml-2" href="{% url 'register' %}">Register</a>
   </form>
 </div>
 {% if message %}

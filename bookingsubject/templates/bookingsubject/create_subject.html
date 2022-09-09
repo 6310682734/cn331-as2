@@ -1,9 +1,9 @@
 {% extends 'bookingsubject/layout.html' %} {% block body %}
 <div>
-  <h2 class="head-text text-center">Create Subject</h2>
+  <h2 class="text-white text-center">Create Subject</h2>
   <form action="{% url 'create_subject' %}" method="POST">
     {% csrf_token %}
-    <label for="code" class="sub-text form-label text-left">Subject Code</label>
+    <label for="code" class="text-white form-label text-left">Subject Code</label>
     <input
       class="form-control m-2"
       type="text"
@@ -13,7 +13,7 @@
       max="5"
     />
 
-    <label for="subject_name" class="sub-text form-label text-left"
+    <label for="subject_name" class="text-white form-label text-left"
       >Subject Name</label
     >
     <input
@@ -24,7 +24,7 @@
       placeholder="Subject Name"
     />
 
-    <label for="semester" class="sub-text form-label text-left">Semester</label>
+    <label for="semester" class="text-white form-label text-left">Semester</label>
     <input
       class="form-control m-2"
       type="number"
@@ -36,7 +36,7 @@
       placeholder="Semester"
     />
 
-    <label for="academic_year" class="sub-text form-label text-left"
+    <label for="academic_year" class="text-white form-label text-left"
       >Academic Year</label
     >
     <input
@@ -50,7 +50,7 @@
       placeholder="Academic Year"
     />
 
-    <label for="amount" class="sub-text form-label text-left"
+    <label for="amount" class="text-white form-label text-left"
       >Student Amount</label
     >
     <input
@@ -71,7 +71,7 @@
         id="status_false"
         value="0"
       />
-      <label class="sub-text form-check-label" for="status_false">
+      <label class="text-white form-check-label" for="status_false">
         CLOSE
       </label>
     </div>
@@ -84,7 +84,7 @@
         value="1"
         checked
       />
-      <label class="sub-text form-check-label" for="status_true"> OPEN </label>
+      <label class="text-white form-check-label" for="status_true"> OPEN </label>
     </div>
     {% if message %}
     <div class="alert alert-danger text-center">{{ message}}</div>

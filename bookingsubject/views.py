@@ -14,12 +14,13 @@ register = template.Library()
 
 
 def index(req, data={"status": None, "message": None}):
-    subjects = Subject.objects.all()
+    subjects = Subject.objects.filter(status=True)
     return render(req, "bookingsubject/index.html", {
         "subjects": subjects,
         "message": data["message"],
         "status": data["status"]
     })
+
 
 def enrollmented(req):
     try:
@@ -33,6 +34,7 @@ def enrollmented(req):
     except Exception as e:
         print("Error : ", e)
         return index(req, {"status": False, "message": "Something went wrong"})
+
 
 def remove_subject(req, subject_id):
     try:
@@ -58,6 +60,7 @@ def subject_info(req, subject_id):
 def update_subject(req, subject_id):
     pass
 
+
 def is_already_enroll(user_id):
     try:
         user_data = User.objects.get(id=user_id)
@@ -77,15 +80,14 @@ def enroll_subject(req, subject_id, user_id):
         if (subject_data.student >= subject_data.amount):
             return index(req, {"status": False, "message": "Class Full"})
         enroll = Enrollment.objects.create(
-            user = user_data,
-            subject = subject_data
+            user=user_data,
+            subject=subject_data
         )
         subject_data.student += 1
         subject_data.save()
         return index(req, {"status": True, "message": "Enroll subject successfully"})
     else:
         return index(req, {"status": True, "message": "Enroll subject failed"})
-
 
 
 def unenroll_subject(req, subject_id):
@@ -100,7 +102,6 @@ def unenroll_subject(req, subject_id):
     except Exception as e:
         print("Error : ", e)
         return index(req, {"status": False, "message": "Delete fail"})
-    
 
 
 def create_subject(req):

@@ -1,7 +1,7 @@
 {% extends 'users/layout.html' %} {% block body %}
 <div class="sub-bg">
   <!-- <h1>Welcome, -->
-  <h1 class="head-text">Announcement</h1>
+  <h1 class="head-text">Announcement 📣</h1>
   <div class="card text-left bg-dark mb-4">
     <div class="card-header"><h5 class="card-title">Subjects</h5></div>
     <div class="card-body">
@@ -18,7 +18,7 @@
       >
     </div>
   </div>
-  <div class="card text-left bg-dark">
+  <div class="card text-left bg-dark mb-4">
     <div class="card-header">
       <h5 class="card-title">Subject enrollmented</h5>
     </div>
@@ -33,6 +33,23 @@
       >
     </div>
   </div>
+  {% if request.user.is_superuser %}
+  <div class="card text-left bg-dark">
+    <div class="card-header">
+      <h5 class="card-title">Create subjects</h5>
+    </div>
+    <div class="card-body">
+      <p class="card-text">Creating subject for enrollment</p>
+    </div>
+    <div class="card-footer text-muted">
+      <a
+        class="position-relative mr-1 justify-content-end btn btn-primary float-right"
+        href="{% url 'create_subject' %}"
+        >Create subject
+      </a>
+    </div>
+  </div>
+  {% endif %}
 </div>
 
 {% endblock %}

@@ -36,12 +36,15 @@ def register_view(req):
         if (con_password != password):
             obj['status'] = False
             obj["message"] = "Confirm password fail"
-        if (username == "" or password == "" or con_password == "" or email == ""):
+        print("Length username : ", len(username))
+        if (username == "" or len(username) == 0 or password == "" or con_password == "" or email == ""):
             obj["status"] = False
             obj["message"] = "Enter your information"
         # Register Process
         if (obj["status"]):
             obj['message'] = "Register successfully"
+        else:
+            return render(req, "users/register.html", {"status": False, "message": obj["message"]})
         user = User.objects.create_user(
             username=username, password=password, email=email, first_name=firstname, last_name=lastname)
     return render(req, "users/register.html", obj)

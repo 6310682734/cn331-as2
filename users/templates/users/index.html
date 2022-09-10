@@ -18,6 +18,7 @@
       >
     </div>
   </div>
+  {% if request.user.is_superuser == False %}
   <div class="card text-left bg-dark mb-4">
     <div class="card-header">
       <h5 class="card-title">Subject enrollmented</h5>
@@ -33,7 +34,7 @@
       >
     </div>
   </div>
-  {% if request.user.is_superuser %}
+  {% endif %} {% if request.user.is_superuser %}
   <div class="card text-left bg-dark">
     <div class="card-header">
       <h5 class="card-title">Create subjects</h5>

@@ -34,6 +34,7 @@
     </thead>
     <tbody class="text text-center">
       {% for subject in subjects %}
+      {% if request.user.is_superuser %}
       <tr>
         <th scope="row" class="text-dark align-middle">#{{ subject.code }}</th>
         <th class="align-middle">{{ subject.subject_name }}</th>
@@ -71,6 +72,45 @@
           </div>
         </th>
       </tr>
+      {% elif request.user.is_superuser == False and subject.status == True %}
+      <tr>
+        <th scope="row" class="text-dark align-middle">#{{ subject.code }}</th>
+        <th class="align-middle">{{ subject.subject_name }}</th>
+        <th class="align-middle">{{ subject.semester }}</th>
+        <th class="align-middle">{{ subject.academic_year }}</th>
+        <th class="align-middle">{{ subject.amount }}/{{ subject.student }}</th>
+        {% if request.user.is_superuser %}
+        <th class="align-middle">{{ subject.status }}</th>
+        {% endif %}
+        <th class="align-middle">
+          <div class="row ml-0">
+            <div class="col">
+              <a
+                class="btn btn-primary"
+                href="{% url 'subject_info' subject.id %}"
+                >View</a
+              >
+            </div>
+            {% if request.user.is_superuser %}
+            <div class="col ml-0">
+              <a
+                class="btn btn-warning"
+                href="{% url 'update_subject' subject.id %}"
+                >Update</a
+              >
+            </div>
+            {% endif %}
+            {% if request.user.is_superuser %}
+            <div class="col">
+              <form action="{% url 'remove_subject' subject.id %}">
+                <button class="btn btn-danger" type="submit">Delete</button>
+              </form>
+            </div>
+            {% endif %}
+          </div>
+        </th>
+      </tr>
+      {% endif %}
       {% empty %}
       <tr>
         <th colspan="7"><i>No data</i></th>

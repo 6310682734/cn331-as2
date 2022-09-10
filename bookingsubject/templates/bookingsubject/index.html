@@ -44,7 +44,7 @@
         <th class="align-middle">{{ subject.status }}</th>
         {% endif %}
         <th class="align-middle">
-          <div class="row">
+          <div class="row ml-0">
             <div class="col">
               <a
                 class="btn btn-primary"
@@ -52,6 +52,15 @@
                 >View</a
               >
             </div>
+            {% if request.user.is_superuser %}
+            <div class="col ml-0">
+              <a
+                class="btn btn-warning"
+                href="{% url 'update_subject' subject.id %}"
+                >Update</a
+              >
+            </div>
+            {% endif %}
             {% if request.user.is_superuser %}
             <div class="col">
               <form action="{% url 'remove_subject' subject.id %}">

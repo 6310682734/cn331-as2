@@ -3,29 +3,34 @@
   <!-- <h1>Welcome, -->
   <h1 class="head-text">Announcement</h1>
   <div class="card text-left bg-dark mb-4">
-    <div class="card-header">
-      To student
-    </div>
+    <div class="card-header"><h5 class="card-title">Subjects</h5></div>
     <div class="card-body">
-      <h5 class="card-title">Booking subject</h5>
-      <p class="card-text">For students who wish to enroll in various courses.</p>
-      <a href="/bookingsubject" class="btn btn-primary text-right inline">View</a>
+      <p class="card-text">
+        For students who wish to enroll in various courses.
+      </p>
     </div>
     <div class="card-footer">
-      90 days left
+      {% comment %} 90 days left {% endcomment %}
+      <a
+        href="/bookingsubject"
+        class="btn btn-primary float-right text-right inline"
+        >View</a
+      >
     </div>
   </div>
   <div class="card text-left bg-dark">
     <div class="card-header">
-      To student
+      <h5 class="card-title">Subject enrollmented</h5>
     </div>
     <div class="card-body">
-      <h5 class="card-title">Subject enrollmented</h5>
-      <p class="card-text">For viewing courses that students have already registered.</p>
-      <a href="/bookingsubject/enrollmented" class="btn btn-primary">View</a>
+      <p class="card-text">
+        For viewing courses that students have already registered.
+      </p>
     </div>
     <div class="card-footer text-muted">
-      
+      <a href="/bookingsubject/enrollmented" class="btn btn-primary float-right"
+        >View</a
+      >
     </div>
   </div>
 </div>

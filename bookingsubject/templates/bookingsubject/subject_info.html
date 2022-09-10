@@ -28,8 +28,8 @@
       <thead>
         <tr class="sub-text">
           <th scope="col">#</th>
-          <th scope="col">Student ID</th>
           <th scope="col">Name</th>
+          <th scope="col">Student ID</th>
         </tr>
       </thead>
       <tbody>
@@ -37,10 +37,10 @@
         <tr>
           <th scope="row" class="sub-text align-middle">#{{ forloop.counter }}</th>
           <th scope="row" class="sub-text align-middle">
-            {{ enroll.user.username}}
+            {{ enroll.user.first_name }} {{ enroll.user.last_name }}
           </th>
           <th scope="row" class="sub-text align-middle">
-            {{ enroll.user.first_name }} {{ enroll.user.last_name }}
+            {{ enroll.user.username}}
           </th>
         </tr>
         {% empty %}

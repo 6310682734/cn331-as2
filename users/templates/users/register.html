@@ -1,41 +1,74 @@
 {% extends 'users/layout.html' %} {% block body %}
 <div class="register">
   <h1 class="head-text">REGISTER</h1>
-  <form 
-  action="{% url 'register' %}"
-  method="post" 
-  align="center"
-  >
+  <form action="{% url 'register' %}" method="post" align="center">
     {%csrf_token%}
     <div class="form-row">
       <div class="form-group col-md-6 text-left">
-        <label class="col-xs-4 control-label" for="inputEmail4">Student ID</label>
-        <input type="text" class="form-control" name="username" placeholder="Student ID">
+        <label class="col-xs-4 control-label" for="inputEmail4"
+          >Student ID</label
+        >
+        <input
+          type="number"
+          step="1"
+          class="form-control"
+          name="username"
+          minlength="10"
+          maxlength="10"
+          placeholder="Student ID"
+        />
       </div>
       <div class="form-group col-md-6 text-left">
         <label class="control-label" for="inputPassword4">Email</label>
-        <input type="email" class="form-control" name="email" placeholder="Email">
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          placeholder="Email"
+        />
       </div>
     </div>
     <div class="form-group text-left">
       <label for="inputAddress">Firstname</label>
-      <input type="text" class="form-control" name="firstname" placeholder="Firstname">
+      <input
+        type="text"
+        class="form-control"
+        name="firstname"
+        placeholder="Firstname"
+      />
     </div>
     <div class="form-group text-left">
       <label for="inputAddress2">Lastname</label>
-      <input type="text" class="form-control" name="lastname" placeholder="Lastname">
+      <input
+        type="text"
+        class="form-control"
+        name="lastname"
+        placeholder="Lastname"
+      />
     </div>
     <div class="form-row text-left">
       <div class="form-group col-md-6">
         <label for="inputPassword4">Password</label>
-        <input type="password" class="form-control" name="password" placeholder="Password">
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          placeholder="Password"
+        />
       </div>
       <div class="form-group col-md-6 text-left">
         <label for="inputPassword4">Confirm Password</label>
-        <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password">
+        <input
+          type="password"
+          class="form-control"
+          name="confirm_password"
+          placeholder="Confirm Password"
+        />
       </div>
     </div>
-    <button type="submit" class="btn btn-primary" value="Register">Register</button>
+    <button type="submit" class="btn btn-primary" value="Register">
+      Register
+    </button>
     <a class="btn btn-secondary ml-2" href="{% url 'login' %}">Login</a>
   </form>
 </div>
@@ -44,7 +77,7 @@
   {% if status and message %}
   <div class="alert alert-success">Register Success</div>
   {% elif status == False %}
-  <div class="alert alert-danger">
+  <div class="alert alert-danger text-dark">
     <b> {{ message }}</b>
   </div>
   {% endif %}

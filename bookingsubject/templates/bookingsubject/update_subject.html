@@ -1,0 +1,109 @@
+{% extends 'bookingsubject/layout.html' %} {% block body %}
+<div>
+  <h2 class="text-white text-center">Update Subject</h2>
+  <form action="{% url 'update_subject' subject_data.id %}" method="POST">
+    {% csrf_token %}
+    <label for="code" class="text-white form-label text-left">Subject Code</label>
+    <input
+      readonly
+      class="form-control m-2"
+      type="text"
+      id="code"
+      name="code"
+      value={{subject_data.code}}
+      placeholder={{subject_data.code}}
+      max="5"
+    />
+
+    <label for="subject_name" class="text-white form-label text-left"
+      >Subject Name</label
+    >
+    <input
+      class="form-control m-2"
+      type="text"
+      id="subject_name"
+      name="subject_name"
+      value={{subject_data.subject_name}}
+      placeholder={{subject_data.subject_name}}
+    />
+
+    <label for="semester" class="text-white form-label text-left">Semester</label>
+    <input
+      class="form-control m-2"
+      type="number"
+      min="1"
+      max="3"
+      step="1"
+      id="semester"
+      name="semester"
+      value={{subject_data.semester}}
+      placeholder={{subject_data.semester}}
+    />
+
+    <label for="academic_year" class="text-white form-label text-left"
+      >Academic Year</label
+    >
+    <input
+      class="form-control m-2"
+      type="number"
+      id="academic_year"
+      name="academic_year"
+      step="1"
+      min="2000"
+      max="2100"
+      value={{subject_data.academic_year}}
+      placeholder={{subject_data.academic_year}}
+    />
+
+    <label for="amount" class="text-white form-label text-left"
+      >Student Amount</label
+    >
+    <input
+      class="form-control m-2"
+      type="number"
+      id="amount"
+      name="amount"
+      min="1"
+      max="1000"
+      value={{subject_data.amount}}
+      placeholder={{subject_data.amount}}
+    />
+
+    <div class="form-check mt-2">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="status"
+        id="status_false"
+        value="0"
+      />
+      <label class="text-white form-check-label" for="status_false">
+        CLOSE
+      </label>
+    </div>
+    <div class="form-check">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="status"
+        id="status_true"
+        value="1"
+        checked
+      />
+      <label class="text-white form-check-label" for="status_true"> OPEN </label>
+    </div>
+    {% if message %}
+    <div class="alert alert-danger text-center">{{ message}}</div>
+    {% endif %}
+    <div class="flex float-right">
+      <button type="submit" class="btn btn-warning">Update</button>
+      <a
+        type="button"
+        class="btn btn-secondary"
+        href="{% url 'booking_index' %}"
+        >Cancel</a
+      >
+    </div>
+  </form>
+</div>
+{% endblock %}

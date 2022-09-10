@@ -1,6 +1,7 @@
 from cgitb import small
 import code
 from itertools import count
+from this import s
 from unicodedata import name
 from django.shortcuts import render
 from .models import Enrollment, Subject
@@ -58,7 +59,35 @@ def subject_info(req, subject_id):
 
 
 def update_subject(req, subject_id):
-    pass
+    if (req.method == "POST"):
+        code = req.POST["code"]
+        subject_name = req.POST["subject_name"]
+        semester = req.POST["semester"]
+        academic_year = req.POST["academic_year"]
+        amount = req.POST["amount"]
+        status = req.POST["status"]
+        try:
+            subjects = Subject.objects.get(code=code)
+            return render(req, "bookingsubject/update_subject.html", {"message": "Code duplicate"})
+        except:
+            pass
+        if (academic_year == ""):
+            return render(req, "bookingsubject/update_subject.html", {"message": "Invalid input"})
+        subject = Subject.objects.filter(id=subject_id).update(
+            code = code,
+            subject_name = subject_name,
+            semester = semester,
+            academic_year = academic_year,
+            amount = amount,
+            status = status
+        )
+        return index(req)
+    else:
+        subject_data = Subject.objects.get(id=subject_id)
+        return render(req, "bookingsubject/update_subject.html", {"subject_data": subject_data})
+
+
+    
 
 
 def is_already_enroll(user_id):
@@ -112,7 +141,6 @@ def create_subject(req):
         academic_year = req.POST["academic_year"]
         amount = req.POST["amount"]
         status = req.POST["status"]
-        print(code, subject_name, semester, academic_year, amount, status)
         try:
             subjects = Subject.objects.get(code=code)
             return render(req, "bookingsubject/create_subject.html", {"message": "Code duplicate"})

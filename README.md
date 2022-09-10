@@ -25,9 +25,7 @@ password : <your password>
 ```
 
 > ### If you don't have an account
-```
-1. Click on register button
-2. fill the form
+1.  Click on register button
+2.  fill the form
 3. submit form
 4. go back to login
-```

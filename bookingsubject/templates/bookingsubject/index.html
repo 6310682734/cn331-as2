@@ -15,13 +15,6 @@
           href="{% url 'index' %}"
           >Back</a
         >
-        {% if request.user.is_superuser %}
-        <a
-          class="position-relative mr-1 justify-content-end btn btn-primary float-right"
-          href="{% url 'create_subject' %}"
-          >Create subject</a
-        >
-        {% endif %}
       </div>
     </div>
   </div>

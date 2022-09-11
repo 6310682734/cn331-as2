@@ -51,7 +51,7 @@ def subject_info(req, subject_id):
     try:
         subject = Subject.objects.get(id=subject_id)
         #student = User.objects.filter(is_superuser=False, is_staff=False, is_active=True)
-        check_enroll = is_already_enroll(req.user.id)
+        check_enroll = is_already_enroll(req.user.id, subject_id)
         enrollment_list = Enrollment.objects.filter(subject=subject)
         return render(req, "bookingsubject/subject_info.html", {"subject_data": subject, "enrolls": enrollment_list, "is_already_enroll": check_enroll})
     except Exception as e:
@@ -91,11 +91,17 @@ def update_subject(req, subject_id):
     
 
 
-def is_already_enroll(user_id):
+def is_already_enroll(user_id, subject_id=None):
     try:
         user_data = User.objects.get(id=user_id)
-        enroll = Enrollment.objects.get(user=user_data)
-        return True
+        if(subject_id == None):
+            enroll = Enrollment.objects.get(user=user_data)
+            return True
+        else:
+            subject_data =Subject.objects.get(id=subject_id)
+            print(subject_data)
+            enroll = Enrollment.objects.get(user=user_data, subject=subject_data)
+            return True
     except:
         return False
 
@@ -105,7 +111,7 @@ def enroll_subject(req, subject_id, user_id):
         user_data = User.objects.get(id=user_id)
         username = user_data.username
         subject_data = Subject.objects.get(id=subject_id)
-        if (is_already_enroll(user_id)):
+        if (is_already_enroll(user_id, subject_id)):
             return index(req, {"status": False, "message": "Already Enroll"})
         if (subject_data.student >= subject_data.amount):
             return index(req, {"status": False, "message": "Class Full"})

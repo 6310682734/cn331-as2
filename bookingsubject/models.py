@@ -19,7 +19,7 @@ class Subject(models.Model):
 
 
 class Enrollment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, unique=True, to_field="id")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, to_field="id")
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, to_field="code")
     # firstname = models.CharField(max_length=20)
     # lastname = models.CharField(max_length=20)

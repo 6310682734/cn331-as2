@@ -10,21 +10,39 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="{% static 'users/style.css' %}" />
-    {% if request.resolver_match.url_name != 'login' and request.resolver_match.url_name != 'logout' and request.resolver_match.url_name != 'register' %}
+    {% if request.user.username %}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand">{{request.user.first_name}}  {{request.user.last_name}}</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <a class="navbar-brand"
+        >{{request.user.first_name}} {{request.user.last_name}}</a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
         <span class="navbar-toggler-icon"></span>
       </button>
-    
+
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link mt-1">{{request.user.username}} <span class="sr-only">(current)</span></a>
+            <a class="nav-link mt-1"
+              >{{request.user.username}}
+              <span class="sr-only">(current)</span></a
+            >
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-          <a class="btn btn-danger float-right right-0" id="logout" href="{% url 'logout' %}">Log out</a>
+          <a
+            class="btn btn-danger float-right right-0"
+            id="logout"
+            href="{% url 'logout' %}"
+            >Log out</a
+          >
         </form>
       </div>
     </nav>

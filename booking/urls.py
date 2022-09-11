@@ -18,7 +18,7 @@ from django.urls import path, include
 from users import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", views.index, name="index"),
+    path("", views.login_view, name="index"),
     path('bookingsubject/', include("bookingsubject.urls")),
     path('users/', include("users.urls"))
 ]

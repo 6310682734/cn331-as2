@@ -75,12 +75,12 @@ def update_subject(req, subject_id):
         if (academic_year == ""):
             return render(req, "bookingsubject/update_subject.html", {"message": "Invalid input"})
         subject = Subject.objects.filter(id=subject_id).update(
-            code = code,
-            subject_name = subject_name,
-            semester = semester,
-            academic_year = academic_year,
-            amount = amount,
-            status = status
+            code=code,
+            subject_name=subject_name,
+            semester=semester,
+            academic_year=academic_year,
+            amount=amount,
+            status=status
         )
         return index(req)
     else:
@@ -88,19 +88,17 @@ def update_subject(req, subject_id):
         return render(req, "bookingsubject/update_subject.html", {"subject_data": subject_data})
 
 
-    
-
-
 def is_already_enroll(user_id, subject_id=None):
     try:
         user_data = User.objects.get(id=user_id)
-        if(subject_id == None):
+        if (subject_id == None):
             enroll = Enrollment.objects.get(user=user_data)
             return True
         else:
-            subject_data =Subject.objects.get(id=subject_id)
+            subject_data = Subject.objects.get(id=subject_id)
             print(subject_data)
-            enroll = Enrollment.objects.get(user=user_data, subject=subject_data)
+            enroll = Enrollment.objects.get(
+                user=user_data, subject=subject_data)
             return True
     except:
         return False
@@ -114,7 +112,7 @@ def enroll_subject(req, subject_id, user_id):
         if (is_already_enroll(user_id, subject_id)):
             return index(req, {"status": False, "message": "Already Enroll"})
         if (subject_data.student >= subject_data.amount):
-            return index(req, {"status": False, "message": "Class Full"})
+            return index(req, {"status": False, "message": "Out of seat"})
         enroll = Enrollment.objects.create(
             user=user_data,
             subject=subject_data
@@ -134,7 +132,7 @@ def unenroll_subject(req, subject_id):
         enroll.delete()
         subject_data.student -= 1
         subject_data.save()
-        return index(req, {"status": True, "message": "Remove subject successfully"})
+        return index(req, {"status": True, "message": "Unenroll successfully"})
     except Exception as e:
         print("Error : ", e)
         return index(req, {"status": False, "message": "Delete fail"})

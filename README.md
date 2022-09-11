@@ -16,6 +16,7 @@ on window : python manage.py runserver
 > ### Sign in with  ***admin account***
 > * create subjects
 >  * delete subjects
+> * update subjects
 ```
 username : admin
 password : admin

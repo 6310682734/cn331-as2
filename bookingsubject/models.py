@@ -6,8 +6,8 @@ from django.contrib.auth.models import User
 
 
 class Subject(models.Model):
-    id = models.CharField(max_length=25, blank=False,
-                          null=False, unique=True, primary_key=True)
+    # id = models.CharField(max_length=25, blank=False,
+    #                       null=False, unique=True, primary_key=True)
     code = models.CharField(max_length=3, unique=True)
     subject_name = models.CharField(max_length=15)
     semester = models.CharField(max_length=1)

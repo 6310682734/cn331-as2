@@ -4,3 +4,4 @@ asgiref==3.5.2
 gunicorn
 django-heroku
 psycopg2
+whitenoise

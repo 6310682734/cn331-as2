@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
-import django_heroku
+# import django_heroku
 from pathlib import Path
 import os
 
@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-y%-qr$ean^d@7*_!mib*4%*kngu_t1unx(r&qr-f8ae3@m^-%+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://protected-badlands-58339.herokuapp.com/']
+ALLOWED_HOSTS = ["", 'https://protected-badlands-58339.herokuapp.com/']
 
 
 # Application definition
@@ -119,7 +119,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-# STATIC_URL = 'static/'
+STATIC_URL = 'static/'
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, 'static'),
 # ]
@@ -131,4 +131,4 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())

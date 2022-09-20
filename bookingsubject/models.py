@@ -6,8 +6,8 @@ from django.contrib.auth.models import User
 
 
 class Subject(models.Model):
-    id = models.CharField(max_length=25, blank=False,
-                          null=False, unique=True, primary_key=True)
+    # id = models.CharField(max_length=25, blank=False,
+    #                       null=False, unique=True, primary_key=True)
     code = models.CharField(max_length=3)
     subject_name = models.CharField(max_length=15)
     semester = models.CharField(max_length=1)
@@ -21,9 +21,8 @@ class Subject(models.Model):
 
 
 class Enrollment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, to_field="id")
-    subject = models.ForeignKey(
-        Subject, on_delete=models.CASCADE, to_field="id", unique=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     # firstname = models.CharField(max_length=20)
     # lastname = models.CharField(max_length=20)
     # student_id = models.CharField(max_length=10)

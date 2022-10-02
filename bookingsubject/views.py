@@ -16,7 +16,6 @@ register = template.Library()
 
 def index(req, data={"status": None, "message": None}):
     subjects = Subject.objects.all()
-    print(subjects)
     return render(req, "bookingsubject/index.html", {
         "subjects": subjects,
         "message": data["message"],

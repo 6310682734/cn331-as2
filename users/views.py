@@ -26,28 +26,25 @@ def register_view(req):
         con_password = req.POST["confirm_password"]
         try:
             _user = User.objects.get(username=username)
-            print("<---- User : ", _user, " ---->")
-            obj["status"] = False
-            obj["message"] = "Username already used"
-            print("<-- user not unique -->")
-            return render(req, "users/register.html", {"status": False, "message": "Username already used"})
+            return render(req, "users/register.html", {"status": False, "message": "Username already used"}, status=400)
         except:
-            print("<--- User not found (Can register) --->")
+            pass
+            # print("<--- User not found (Can register) --->")
         if (con_password != password):
             obj['status'] = False
             obj["message"] = "Confirm password fail"
-        print("Length username : ", len(username))
         if (username == "" or len(username) == 0 or password == "" or con_password == "" or email == ""):
             obj["status"] = False
             obj["message"] = "Enter your information"
         # Register Process
         if (obj["status"]):
             obj['message'] = "Register successfully"
+            user = User.objects.create_user(
+                username=username, password=password, email=email, first_name=firstname, last_name=lastname)
+            return render(req, "users/register.html", {"status": True, "message": obj["message"]}, status=200)
         else:
-            return render(req, "users/register.html", {"status": False, "message": obj["message"]})
-        user = User.objects.create_user(
-            username=username, password=password, email=email, first_name=firstname, last_name=lastname)
-    return render(req, "users/register.html", obj)
+            return render(req, "users/register.html", {"status": False, "message": obj["message"]}, status=400)
+    return render(req, "users/register.html", obj, status=200)
 
 
 def login_view(req):
@@ -55,12 +52,11 @@ def login_view(req):
         username = req.POST["username"]
         password = req.POST["password"]
         user = authenticate(req, username=username, password=password)
-        print("Authenticate : ", user)
         if (user is not None):
             login(req, user)
             return HttpResponseRedirect(reverse("index"))
         else:
-            return render(req, "users/login.html", {"message": "Invalid credential"})
+            return render(req, "users/login.html", {"message": "Invalid credential"}, status=400)
     return render(req, "users/login.html")
 
 

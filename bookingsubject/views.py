@@ -29,11 +29,9 @@ def enrollmented(req):
         enrollment = Enrollment.objects.filter(user=user_data)
         if (enrollment.count() <= 0):
             return render(req, "bookingsubject/enrollment_info.html", {"enrolls": {}})
-        #student = User.objects.filter(is_superuser=False, is_staff=False, is_active=True)
-        print(enrollment)
         return render(req, "bookingsubject/enrollment_info.html", {"enrolls": enrollment})
     except Exception as e:
-        print("Error : ", e)
+        print("Error from enrollmented view : ", e)
         return index(req, {"status": False, "message": "Something went wrong"})
 
 
@@ -54,7 +52,7 @@ def subject_info(req, subject_id):
         enrollment_list = Enrollment.objects.filter(subject=subject)
         return render(req, "bookingsubject/subject_info.html", {"subject_data": subject, "enrolls": enrollment_list, "is_already_enroll": check_enroll})
     except Exception as e:
-        print("Error : ", e)
+        print("Error from subject info: ", e)
         return index(req, {"status": False, "message": "Something went wrong"})
 
 
@@ -95,7 +93,6 @@ def is_already_enroll(user_id, subject_id=None):
             return True
         else:
             subject_data = Subject.objects.get(id=subject_id)
-            print(subject_data)
             enroll = Enrollment.objects.get(
                 user=user_data, subject=subject_data)
             return True
@@ -133,7 +130,7 @@ def unenroll_subject(req, subject_id):
         subject_data.save()
         return index(req, {"status": True, "message": "Unenroll successfully"})
     except Exception as e:
-        print("Error : ", e)
+        print("Error from unenroll : ", e)
         return index(req, {"status": False, "message": "Delete fail"})
 
 

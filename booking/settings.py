@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# TEST_RUNNER = ["-s"]
 
 # Application definition
 

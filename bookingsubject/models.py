@@ -15,12 +15,16 @@ class Subject(models.Model):
     student = models.IntegerField(default=0)
 
     def __str__(self):
-        return f"{self.code} {self.subject_name} {self.semester} {self.academic_year} {self.amount} {self.status} {self.student}"
+        return f"{self.code} {self.subject} {self.subject_name} {self.semester} {self.academic_year} {self.amount} {self.status} {self.student}"
+
+    def is_seat_available(self):
+        return self.amount > self.student
 
 
 class Enrollment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    subject = models.ForeignKey(
+        Subject, on_delete=models.CASCADE, default=None)
     # firstname = models.CharField(max_length=20)
     # lastname = models.CharField(max_length=20)
     # student_id = models.CharField(max_length=10)

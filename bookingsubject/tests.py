@@ -1,3 +1,4 @@
+from urllib import response
 from django.test import TestCase
 
 from bookingsubject.models import Enrollment, Subject
@@ -35,13 +36,30 @@ class EnrollmentTestCase(TestCase):
         self.assertFalse(subject.is_seat_available())  # Test seat unavailable
 
     def test_unenroll_subject(self):
-        pass
+        url = "/bookingsubject/1/unenroll"
+        body = {"subject_id": 1}
+        response = self.client.post(url, body)
+        self.assertEqual(response.status_code, 200)
 
     def test_remove_subject(self):
-        pass
+        url = "/bookingsubject/1/remove"
+        body = {"subject_id": 1}
+        response = self.client.post(url, body)
+        self.assertEqual(response.status_code, 200)
 
     def test_update_subject(self):
-        pass
+        url = "/bookingsubject/1/update"
+        body = {
+            "subject_id": 1, 
+            "code": 100, 
+            "subject_name": "TU200",
+            "semester": 2,
+            "academic_year": 2022,
+            "amount": 50,
+            "status": 0,
+        }
+        response = self.client.post(url, body)
+        self.assertEqual(response.status_code, 200)
 
     # def test_enroll_subject(self):
     #     subject = Subject.objects.first()

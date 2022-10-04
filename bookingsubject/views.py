@@ -14,13 +14,13 @@ register = template.Library()
 # Create your views here.
 
 
-def index(req, data={"status": None, "message": None}):
+def index(req, data={"status": None, "message": None}, status=200):
     subjects = Subject.objects.all()
     return render(req, "bookingsubject/index.html", {
         "subjects": subjects,
         "message": data["message"],
         "status": data["status"]
-    })
+    }, status=status)
 
 
 def enrollmented(req):
@@ -40,7 +40,7 @@ def remove_subject(req, subject_id):
         subject = Subject.objects.get(id=subject_id)
         subject.delete()
     except:
-        return index(req, {"status": False, "message": "Delete fail"})
+        return index(req, {"status": False, "message": "Delete fail"}, status=400)
     return index(req, {"status": True, "message": "Remove subject successfully"})
 
 
@@ -106,21 +106,22 @@ def enroll_subject(req, subject_id, user_id):
         username = user_data.username
         subject_data = Subject.objects.get(id=subject_id)
         if (is_already_enroll(user_id, subject_id)):
-            return index(req, {"status": False, "message": "Already Enroll"})
+            return index(req, {"status": False, "message": "Already Enroll"}, 400)
         if (subject_data.student >= subject_data.amount):
-            return index(req, {"status": False, "message": "Out of seat"})
+            return index(req, {"status": False, "message": "Out of seat"}, 400)
         enroll = Enrollment.objects.create(
             user=user_data,
             subject=subject_data
         )
         subject_data.student += 1
         subject_data.save()
-        return index(req, {"status": True, "message": "Enroll subject successfully"})
+        return index(req, {"status": True, "message": "Enroll subject successfully"}, 200)
     else:
-        return index(req, {"status": True, "message": "Enroll subject failed"})
+        return index(req, {"status": True, "message": "Enroll subject failed"}, 400)
 
 
 def unenroll_subject(req, subject_id):
+    print("user id : ", req.user.id)
     try:
         user_data = User.objects.get(id=req.user.id)
         subject_data = Subject.objects.get(id=subject_id)
@@ -128,10 +129,10 @@ def unenroll_subject(req, subject_id):
         enroll.delete()
         subject_data.student -= 1
         subject_data.save()
-        return index(req, {"status": True, "message": "Unenroll successfully"})
+        return index(req, {"status": True, "message": "Unenroll successfully"}, status=200)
     except Exception as e:
         print("Error from unenroll : ", e)
-        return index(req, {"status": False, "message": "Delete fail"})
+        return index(req, {"status": False, "message": "Delete fail"}, status=200)
 
 
 def create_subject(req):

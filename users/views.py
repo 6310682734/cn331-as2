@@ -53,8 +53,10 @@ def login_view(req):
         password = req.POST["password"]
         user = authenticate(req, username=username, password=password)
         if (user is not None):
+            print("<------- Login Success ----->")
             login(req, user)
-            return HttpResponseRedirect(reverse("index"))
+            return render(req, "users/index.html", status=200)
+            # return HttpResponseRedirect(reverse("index"))
         else:
             return render(req, "users/login.html", {"message": "Invalid credential"}, status=400)
     return render(req, "users/login.html")

@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 
 class UserTestCase(TestCase):
     def setUp(self):
-        User.objects.create(username="admin", password="admin")
+        User.objects.create_user(username="admin", password="admin")
 
     def test_index_view(self):
         response = self.client.get("")
@@ -48,6 +48,7 @@ class UserTestCase(TestCase):
         self.assertEqual(response.status_code, 400)  # Incorrect Password
         body["password"] = "admin"
         response = self.client.post(url, body)
+        self.assertEqual(response.status_code, 200)  # Correct Password
         # Test login
 
     def test_logout_view(self):

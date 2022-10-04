@@ -53,7 +53,7 @@ def login_view(req):
         password = req.POST["password"]
         user = authenticate(req, username=username, password=password)
         if (user is not None):
-            print("<------- Login Success ----->")
+            print("<-------  Login Success ----->")
             login(req, user)
             return render(req, "users/index.html", status=200)
             # return HttpResponseRedirect(reverse("index"))

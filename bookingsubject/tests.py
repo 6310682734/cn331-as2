@@ -10,7 +10,7 @@ class EnrollmentTestCase(TestCase):
     def setUp(self):
         Subject.objects.create(code="TU100", subject_name="TU100",
                                semester=1, academic_year="2022", amount=1, status=True)
-        User.objects.create(username="admin", password="admin")
+        User.objects.create_user(username="admin", password="admin")
 
     def test_seat_available(self):
         subject = Subject.objects.first()
@@ -43,7 +43,7 @@ class EnrollmentTestCase(TestCase):
         url = "/users/login"
         body = {"username": "admin", "password": "admin"}
         response = self.client.post(url, body)
-        subject_id = 0
+        subject_id = 1
 
         url = "/bookingsubject/1/1/enroll"
         body = {"user_id": 1, "subject_id": subject_id}

@@ -132,7 +132,7 @@ def unenroll_subject(req, subject_id):
         return index(req, {"status": True, "message": "Unenroll successfully"}, status=200)
     except Exception as e:
         print("Error from unenroll : ", e)
-        return index(req, {"status": False, "message": "Delete fail"}, status=200)
+        return index(req, {"status": False, "message": "Delete fail"}, status=400)
 
 
 def create_subject(req):
